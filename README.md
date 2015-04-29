@@ -88,7 +88,7 @@ netClient.connectToServer(peerDevice)
 Required delegate calls.
 ```swift
 func clientBrowsingError(errorDict:[NSObject: AnyObject]) {
-println("browsing error: \(errorDict)")
+	println("browsing error: \(errorDict)")
 }
 
 func serverFound(server:ALBPeer) {
@@ -108,7 +108,7 @@ func connectionDenied(server:ALBPeer) {
 }
 
 func connected(connection:ALBPeerConnection) {
-// connection delegate must be made to get read and write calls
+	// connection delegate must be made to get read and write calls
 	connection.delegate = self
 
 	// strong reference must be kept of the connection
