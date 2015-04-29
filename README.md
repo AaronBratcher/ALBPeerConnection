@@ -53,7 +53,7 @@ func allowConnectionRequest(remoteNode:ALBPeer, requestResponse:(allow:Bool)->()
 }
 
 func clientDidConnect(connection:ALBPeerConnection) {
-	// connection delegate must be assigned once received
+	// connection delegate must be assigned immediately
 	connection.delegate = self
 
 	// strong reference must be kept of the connection
@@ -107,7 +107,7 @@ func connectionDenied(server:ALBPeer) {
 }
 
 func connected(connection:ALBPeerConnection) {
-	// connection delegate must be made to get read and write calls
+	// connection delegate must be assigned immediately
 	connection.delegate = self
 
 	// strong reference must be kept of the connection
