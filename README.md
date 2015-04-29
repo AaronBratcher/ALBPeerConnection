@@ -1,6 +1,8 @@
 # ALBPeerConnection
 Peer-Peer networking classes written (mostly) in Swift. (Socket is Objective-C class GCDAsyncSocket)
 
+See the Shopping project for an example of using this class to sync between instances of an app.
+
 **This class uses Swift 1.2**
 
 ** To Do:
