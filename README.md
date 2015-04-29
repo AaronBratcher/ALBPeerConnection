@@ -6,7 +6,7 @@ Peer-Peer networking classes written (mostly) in Swift. (Socket is Objective-C c
 ** To Do:
 * Add Unit Testing
 * Add secure connections
-**
+
 
 Peer to Peer classes for communicating between nearby devices over wifi or bluetooth.
 
