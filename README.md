@@ -1,5 +1,5 @@
 # ALBPeerConnection
-Peer-Peer networking classes written (mostly) in Swift
+Peer-Peer networking classes written (mostly) in Swift. (Socket is Objective-C class GCDAsyncSocket)
 
 **This class uses Swift 1.2**
 
