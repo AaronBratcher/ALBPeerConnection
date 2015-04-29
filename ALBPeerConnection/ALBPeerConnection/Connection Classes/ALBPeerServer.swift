@@ -52,7 +52,7 @@ class ALBPeerServer:NSObject,NSNetServiceDelegate,GCDAsyncSocketDelegate {
 	:param: serverNode An ALBPeer object initialized with a name and unique identifier.
 	:param: serverDelegate A reference to an ALBPeerServerDelegate object. This parameter is optional.
 	**/
-	init(serviceType:String, serverNode:ALBPeer, serverDelegate:ALBPeerServerDelegate) {
+	init(serviceType:String, serverNode:ALBPeer, serverDelegate:ALBPeerServerDelegate?) {
 		_serviceType = serviceType
 		_localNode = serverNode
 		delegate = serverDelegate

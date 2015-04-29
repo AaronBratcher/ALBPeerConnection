@@ -71,7 +71,7 @@ class ALBPeerClient:NSObject,NSNetServiceBrowserDelegate,NSNetServiceDelegate,GC
 	:param: serverNode An ALBPeer object initialized with a name and unique identifier.
 	:param: clientDelegate A reference to an ALBPeerClientDelegate object. This parameter is optional.
 	**/
-	init(serviceType:String, clientNode:ALBPeer, clientDelegate:ALBPeerClientDelegate) {
+	init(serviceType:String, clientNode:ALBPeer, clientDelegate:ALBPeerClientDelegate?) {
         _serviceType = serviceType
         _localNode = clientNode
 		delegate = clientDelegate
