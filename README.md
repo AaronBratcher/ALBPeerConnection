@@ -128,7 +128,7 @@ Send text, data, and local resources to the remote connection
 ```swift
 connection.sendText("sample text string")
 connection.sendData(dataObject)
-connection.sendResourceAtURL(localURL, name:"fileName", resourceID:"unique identifier", onCompletion: { (sent) -> () in
+let progressTracker = connection.sendResourceAtURL(localURL, name:"fileName", resourceID:"unique identifier", onCompletion: { (sent) -> () in
 	// do some cleanup, etc.
 })
 ```
