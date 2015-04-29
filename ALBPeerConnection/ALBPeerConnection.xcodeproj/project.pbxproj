@@ -1,0 +1,474 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8965FE2F1ADB349300EAF08E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8965FE2E1ADB349300EAF08E /* AppDelegate.swift */; };
+		8965FE311ADB349300EAF08E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8965FE301ADB349300EAF08E /* ViewController.swift */; };
+		8965FE341ADB349300EAF08E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8965FE321ADB349300EAF08E /* Main.storyboard */; };
+		8965FE361ADB349300EAF08E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8965FE351ADB349300EAF08E /* Images.xcassets */; };
+		8965FE391ADB349300EAF08E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8965FE371ADB349300EAF08E /* LaunchScreen.xib */; };
+		8965FE451ADB349300EAF08E /* ALBPeerConnectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8965FE441ADB349300EAF08E /* ALBPeerConnectionTests.swift */; };
+		8965FE751ADB359800EAF08E /* ALBPeer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8965FE6D1ADB359800EAF08E /* ALBPeer.swift */; };
+		8965FE761ADB359800EAF08E /* ALBPeerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8965FE6E1ADB359800EAF08E /* ALBPeerClient.swift */; };
+		8965FE771ADB359800EAF08E /* ALBPeerConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8965FE6F1ADB359800EAF08E /* ALBPeerConnection.swift */; };
+		8965FE781ADB359800EAF08E /* ALBPeerPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8965FE701ADB359800EAF08E /* ALBPeerPacket.swift */; };
+		8965FE791ADB359800EAF08E /* ALBPeerServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8965FE711ADB359800EAF08E /* ALBPeerServer.swift */; };
+		8965FE7A1ADB359800EAF08E /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 8965FE741ADB359800EAF08E /* GCDAsyncSocket.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8965FE3F1ADB349300EAF08E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8965FE211ADB349300EAF08E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8965FE281ADB349300EAF08E;
+			remoteInfo = ALBPeerConnection;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		8965FE291ADB349300EAF08E /* ALBPeerConnection.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ALBPeerConnection.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8965FE2D1ADB349300EAF08E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8965FE2E1ADB349300EAF08E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		8965FE301ADB349300EAF08E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8965FE331ADB349300EAF08E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		8965FE351ADB349300EAF08E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		8965FE381ADB349300EAF08E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		8965FE3E1ADB349300EAF08E /* ALBPeerConnectionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ALBPeerConnectionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8965FE431ADB349300EAF08E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8965FE441ADB349300EAF08E /* ALBPeerConnectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ALBPeerConnectionTests.swift; sourceTree = "<group>"; };
+		8965FE6D1ADB359800EAF08E /* ALBPeer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALBPeer.swift; sourceTree = "<group>"; };
+		8965FE6E1ADB359800EAF08E /* ALBPeerClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALBPeerClient.swift; sourceTree = "<group>"; };
+		8965FE6F1ADB359800EAF08E /* ALBPeerConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALBPeerConnection.swift; sourceTree = "<group>"; };
+		8965FE701ADB359800EAF08E /* ALBPeerPacket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALBPeerPacket.swift; sourceTree = "<group>"; };
+		8965FE711ADB359800EAF08E /* ALBPeerServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALBPeerServer.swift; sourceTree = "<group>"; };
+		8965FE731ADB359800EAF08E /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		8965FE741ADB359800EAF08E /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
+		8965FE7C1ADB36AC00EAF08E /* ALBPeerConnection-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "ALBPeerConnection-Bridging-Header.h"; path = "../../../xcodeprojects/ALBPeerConnection/ALBPeerConnection/ALBPeerConnection-Bridging-Header.h"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8965FE261ADB349300EAF08E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8965FE3B1ADB349300EAF08E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8965FE201ADB349300EAF08E = {
+			isa = PBXGroup;
+			children = (
+				8965FE7C1ADB36AC00EAF08E /* ALBPeerConnection-Bridging-Header.h */,
+				8965FE2B1ADB349300EAF08E /* ALBPeerConnection */,
+				8965FE411ADB349300EAF08E /* ALBPeerConnectionTests */,
+				8965FE2A1ADB349300EAF08E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8965FE2A1ADB349300EAF08E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8965FE291ADB349300EAF08E /* ALBPeerConnection.app */,
+				8965FE3E1ADB349300EAF08E /* ALBPeerConnectionTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8965FE2B1ADB349300EAF08E /* ALBPeerConnection */ = {
+			isa = PBXGroup;
+			children = (
+				8965FE6C1ADB359800EAF08E /* Connection Classes */,
+				8965FE2E1ADB349300EAF08E /* AppDelegate.swift */,
+				8965FE301ADB349300EAF08E /* ViewController.swift */,
+				8965FE321ADB349300EAF08E /* Main.storyboard */,
+				8965FE351ADB349300EAF08E /* Images.xcassets */,
+				8965FE371ADB349300EAF08E /* LaunchScreen.xib */,
+				8965FE2C1ADB349300EAF08E /* Supporting Files */,
+			);
+			path = ALBPeerConnection;
+			sourceTree = "<group>";
+		};
+		8965FE2C1ADB349300EAF08E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8965FE2D1ADB349300EAF08E /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8965FE411ADB349300EAF08E /* ALBPeerConnectionTests */ = {
+			isa = PBXGroup;
+			children = (
+				8965FE441ADB349300EAF08E /* ALBPeerConnectionTests.swift */,
+				8965FE421ADB349300EAF08E /* Supporting Files */,
+			);
+			path = ALBPeerConnectionTests;
+			sourceTree = "<group>";
+		};
+		8965FE421ADB349300EAF08E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8965FE431ADB349300EAF08E /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8965FE6C1ADB359800EAF08E /* Connection Classes */ = {
+			isa = PBXGroup;
+			children = (
+				8965FE6D1ADB359800EAF08E /* ALBPeer.swift */,
+				8965FE6E1ADB359800EAF08E /* ALBPeerClient.swift */,
+				8965FE6F1ADB359800EAF08E /* ALBPeerConnection.swift */,
+				8965FE701ADB359800EAF08E /* ALBPeerPacket.swift */,
+				8965FE711ADB359800EAF08E /* ALBPeerServer.swift */,
+				8965FE721ADB359800EAF08E /* TCP */,
+			);
+			path = "Connection Classes";
+			sourceTree = "<group>";
+		};
+		8965FE721ADB359800EAF08E /* TCP */ = {
+			isa = PBXGroup;
+			children = (
+				8965FE731ADB359800EAF08E /* GCDAsyncSocket.h */,
+				8965FE741ADB359800EAF08E /* GCDAsyncSocket.m */,
+			);
+			path = TCP;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8965FE281ADB349300EAF08E /* ALBPeerConnection */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8965FE481ADB349300EAF08E /* Build configuration list for PBXNativeTarget "ALBPeerConnection" */;
+			buildPhases = (
+				8965FE251ADB349300EAF08E /* Sources */,
+				8965FE261ADB349300EAF08E /* Frameworks */,
+				8965FE271ADB349300EAF08E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ALBPeerConnection;
+			productName = ALBPeerConnection;
+			productReference = 8965FE291ADB349300EAF08E /* ALBPeerConnection.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8965FE3D1ADB349300EAF08E /* ALBPeerConnectionTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8965FE4B1ADB349300EAF08E /* Build configuration list for PBXNativeTarget "ALBPeerConnectionTests" */;
+			buildPhases = (
+				8965FE3A1ADB349300EAF08E /* Sources */,
+				8965FE3B1ADB349300EAF08E /* Frameworks */,
+				8965FE3C1ADB349300EAF08E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8965FE401ADB349300EAF08E /* PBXTargetDependency */,
+			);
+			name = ALBPeerConnectionTests;
+			productName = ALBPeerConnectionTests;
+			productReference = 8965FE3E1ADB349300EAF08E /* ALBPeerConnectionTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8965FE211ADB349300EAF08E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = "Aaron Bratcher";
+				TargetAttributes = {
+					8965FE281ADB349300EAF08E = {
+						CreatedOnToolsVersion = 6.3;
+					};
+					8965FE3D1ADB349300EAF08E = {
+						CreatedOnToolsVersion = 6.3;
+						TestTargetID = 8965FE281ADB349300EAF08E;
+					};
+				};
+			};
+			buildConfigurationList = 8965FE241ADB349300EAF08E /* Build configuration list for PBXProject "ALBPeerConnection" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8965FE201ADB349300EAF08E;
+			productRefGroup = 8965FE2A1ADB349300EAF08E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8965FE281ADB349300EAF08E /* ALBPeerConnection */,
+				8965FE3D1ADB349300EAF08E /* ALBPeerConnectionTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8965FE271ADB349300EAF08E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8965FE341ADB349300EAF08E /* Main.storyboard in Resources */,
+				8965FE391ADB349300EAF08E /* LaunchScreen.xib in Resources */,
+				8965FE361ADB349300EAF08E /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8965FE3C1ADB349300EAF08E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8965FE251ADB349300EAF08E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8965FE7A1ADB359800EAF08E /* GCDAsyncSocket.m in Sources */,
+				8965FE761ADB359800EAF08E /* ALBPeerClient.swift in Sources */,
+				8965FE781ADB359800EAF08E /* ALBPeerPacket.swift in Sources */,
+				8965FE311ADB349300EAF08E /* ViewController.swift in Sources */,
+				8965FE751ADB359800EAF08E /* ALBPeer.swift in Sources */,
+				8965FE791ADB359800EAF08E /* ALBPeerServer.swift in Sources */,
+				8965FE771ADB359800EAF08E /* ALBPeerConnection.swift in Sources */,
+				8965FE2F1ADB349300EAF08E /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8965FE3A1ADB349300EAF08E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8965FE451ADB349300EAF08E /* ALBPeerConnectionTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8965FE401ADB349300EAF08E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8965FE281ADB349300EAF08E /* ALBPeerConnection */;
+			targetProxy = 8965FE3F1ADB349300EAF08E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		8965FE321ADB349300EAF08E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8965FE331ADB349300EAF08E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		8965FE371ADB349300EAF08E /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8965FE381ADB349300EAF08E /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8965FE461ADB349300EAF08E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8965FE471ADB349300EAF08E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8965FE491ADB349300EAF08E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = ALBPeerConnection/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ALBPeerConnection-Bridging-Header.h";
+			};
+			name = Debug;
+		};
+		8965FE4A1ADB349300EAF08E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = ALBPeerConnection/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ALBPeerConnection-Bridging-Header.h";
+			};
+			name = Release;
+		};
+		8965FE4C1ADB349300EAF08E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = ALBPeerConnectionTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ALBPeerConnection.app/ALBPeerConnection";
+			};
+			name = Debug;
+		};
+		8965FE4D1ADB349300EAF08E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = ALBPeerConnectionTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ALBPeerConnection.app/ALBPeerConnection";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8965FE241ADB349300EAF08E /* Build configuration list for PBXProject "ALBPeerConnection" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8965FE461ADB349300EAF08E /* Debug */,
+				8965FE471ADB349300EAF08E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8965FE481ADB349300EAF08E /* Build configuration list for PBXNativeTarget "ALBPeerConnection" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8965FE491ADB349300EAF08E /* Debug */,
+				8965FE4A1ADB349300EAF08E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8965FE4B1ADB349300EAF08E /* Build configuration list for PBXNativeTarget "ALBPeerConnectionTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8965FE4C1ADB349300EAF08E /* Debug */,
+				8965FE4D1ADB349300EAF08E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8965FE211ADB349300EAF08E /* Project object */;
+}
