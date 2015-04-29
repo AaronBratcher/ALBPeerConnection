@@ -147,7 +147,7 @@ func dataReceived(connection:ALBPeerConnection, data:NSData) {
 	// data received
 }
 
-func startedReceivingResource(connection:ALBPeerConnection, atURL localURL:NSURL, name:String, resourceID:String) {
+func startedReceivingResource(connection:ALBPeerConnection, atURL:NSURL, name:String, resourceID:String, progress:NSProgress) {
 	// resource transfer started
 }
 
