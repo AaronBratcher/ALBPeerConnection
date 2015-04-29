@@ -46,8 +46,6 @@ func serverPublishingError(errorDict: [NSObject : AnyObject]) {
 }
 
 func allowConnectionRequest(remoteNode:ALBPeer, requestResponse:(allow:Bool)->()) {
-	let device = deviceForNode(remoteNode)
-
 	// do work to determine if this device should be allowed to connect
 	// this can involve user interface calls etc.
 	// requestResponse can be saved and called elsewhere
