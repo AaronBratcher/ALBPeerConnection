@@ -111,7 +111,7 @@ func connected(connection:ALBPeerConnection) {
 	connection.delegate = self
 
 	// strong reference must be kept of the connection
-	_netConnections.append(connection)
+	_netConnection = connection
 }
 ```
 
