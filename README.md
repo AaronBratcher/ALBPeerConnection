@@ -92,27 +92,27 @@ println("browsing error: \(errorDict)")
 }
 
 func serverFound(server:ALBPeer) {
-// a server has been found
+	// a server has been found
 }
 
 func serverLost(server:ALBPeer) {
-// a server is no longer seen
+	// a server is no longer seen
 }
 
 func unableToConnect(server:ALBPeer) {
-// was unable to connect
+	// was unable to connect
 }
 
 func connectionDenied(server:ALBPeer) {
-// connection was denied
+	// connection was denied
 }
 
 func connected(connection:ALBPeerConnection) {
 // connection delegate must be made to get read and write calls
-connection.delegate = self
+	connection.delegate = self
 
-// strong reference must be kept of the connection
-_netConnections.append(connection)
+	// strong reference must be kept of the connection
+	_netConnections.append(connection)
 }
 ```
 
