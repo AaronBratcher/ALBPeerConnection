@@ -15,9 +15,9 @@ Peer to Peer classes for communicating between nearby devices over wifi or bluet
 
 
 ## Getting Started ##
-A client and server are initialized with a Name and Unique identifier for each. The server publishes itself on Bonjour so the client can see it.
+A client and server are initialized with a name and unique identifier for each. The server publishes itself on Bonjour so the client can see it.
 
-When the client requests a connection with the server, a delegate call is made passing the Name and Unique identifier of the client. 
+When the client requests a connection with the server, a delegate call is made passing the name and unique identifier of the client so a determination can be made if a connection should be allowed through code or user interaction.
 
 Once a connection is made, all communication is made through the ALBPeerCommunication class.
 
