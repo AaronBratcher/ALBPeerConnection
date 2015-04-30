@@ -26,7 +26,8 @@ Once a connection is made, all communication is made through the ALBPeerCommunic
 Initialize an instance of the server.
 ```swift
 let netNode = ALBPeer(name: "Server device", peerID: "uniquedeviceid")
-let netServer = ALBPeerServer(serviceType:"_albsync._tcp.", serverNode:netNode, serverDelegate:self)
+let netServer = ALBPeerServer(serviceType:"_albsync._tcp.", serverNode:netNode, serverDelegate:nil)
+netServer.delegate = self
 ```
 
 Start the server, allowing it to be seen and connected to.
@@ -68,7 +69,8 @@ func clientDidConnect(connection:ALBPeerConnection) {
 initialize an instance of the client.
 ```swift
 let netNode = ALBPeer(name: "Server device", peerID: "uniquedeviceid")
-let netClient = ALBPeerClient(serviceType:"_albsync._tcp.", clientNode:netNode, clientDelegate:self)
+let netClient = ALBPeerClient(serviceType:"_albsync._tcp.", clientNode:netNode, clientDelegate:nil)
+netClient.delegate = self
 ```
 
 Browse for servers. Any servers found or lost will invoke delegate calls.
