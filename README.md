@@ -154,7 +154,7 @@ func startedReceivingResource(connection:ALBPeerConnection, atURL:NSURL, name:St
 	// resource transfer started
 }
 
-func resourceReceived(connection:ALBPeerConnection, atURL:NSURL, resourceID:String) {
+func resourceReceived(connection:ALBPeerConnection, atURL:NSURL, name:String, resourceID:String) {
 	// resource transfer complete
 }
 ```
