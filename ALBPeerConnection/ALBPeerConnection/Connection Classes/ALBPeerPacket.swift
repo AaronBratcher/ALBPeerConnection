@@ -68,7 +68,7 @@ struct ALBPeerPacket {
         }
         
         let dictData = NSKeyedArchiver.archivedDataWithRootObject(dict)
-        var packetData = NSMutableData(data: dictData)
+        let packetData = NSMutableData(data: dictData)
         packetData.appendBytes(ALBPeerPacketDelimiter.bytes, length: 3)
         
         return packetData

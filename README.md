@@ -3,7 +3,7 @@ Peer-Peer networking classes written (mostly) in Swift. (Socket is Objective-C c
 
 See the Shopping project for an example of using this class to sync between instances of an app.
 
-**This class uses Swift 1.2**
+**This class uses Swift 2**
 
 ** To Do:
 * Add Unit Testing

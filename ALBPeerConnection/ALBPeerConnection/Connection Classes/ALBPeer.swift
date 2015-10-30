@@ -14,7 +14,7 @@ class ALBPeer {
     var service:NSNetService?
     
     func dataValue() -> NSData {
-        var dict:[String:AnyObject] = ["name":name,"peerID":peerID]
+        let dict:[String:AnyObject] = ["name":name,"peerID":peerID]
         let dictData = NSKeyedArchiver.archivedDataWithRootObject(dict)
         return dictData
     }

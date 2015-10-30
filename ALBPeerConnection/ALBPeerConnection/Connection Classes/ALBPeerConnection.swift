@@ -13,8 +13,8 @@ protocol ALBPeerConnectionDelegate {
 	/**
 	Called when the connection to the remote has been broken.
 	
-	:param: connection The connection that has been disconnected.
-	:param: byRequest Is true if the disconnect was by request.
+	- parameter connection: The connection that has been disconnected.
+	- parameter byRequest: Is true if the disconnect was by request.
 	*/
 	
 	func disconnected(connection:ALBPeerConnection, byRequest:Bool)
@@ -22,37 +22,37 @@ protocol ALBPeerConnectionDelegate {
 	/**
 	Called when text has been received from the remote.
 	
-	:param: connection The connection that received the text.
-	:param: text The text that was received.
+	- parameter connection: The connection that received the text.
+	- parameter text: The text that was received.
 	*/
 	func textReceived(connection:ALBPeerConnection, text:String)
 	
 	/**
 	Called when data has been received from the remote.
 	
-	:param: connection The connection that received the data.
-	:param: data The data that was received.
+	- parameter connection: The connection that received the data.
+	- parameter data: The data that was received.
 	*/
 	func dataReceived(connection:ALBPeerConnection, data:NSData)
 	
 	/**
 	Called when this connection has started to receive a resource from the remote.
 	
-	:param: connection The connection that is receiving the resource.
-	:param: atURL The location of the resource.
-	:param: name The given name of the resource.
-	:param: resourceID The unique identifier of the resource
-	:param: progress An NSProgress object that is updated as the file is received. This cannot be canceled at this time.
+	- parameter connection: The connection that is receiving the resource.
+	- parameter atURL: The location of the resource.
+	- parameter name: The given name of the resource.
+	- parameter resourceID: The unique identifier of the resource
+	- parameter progress: An NSProgress object that is updated as the file is received. This cannot be canceled at this time.
 	*/
 	func startedReceivingResource(connection:ALBPeerConnection, atURL:NSURL, name:String, resourceID:String, progress:NSProgress)
 	
 	/**
 	Called when this connection has finished receiving a resource from the remote.
 	
-	:param: connection The connection that is receiving the resource.
-	:param: atURL The location of the resource.
-	:param: name The given name of the resource.
-	:param: resourceID The unique identifier of the resource
+	- parameter connection: The connection that is receiving the resource.
+	- parameter atURL: The location of the resource.
+	- parameter name: The given name of the resource.
+	- parameter resourceID: The unique identifier of the resource
 	*/
 	func resourceReceived(connection:ALBPeerConnection, atURL:NSURL, name:String, resourceID:String)
 }
@@ -117,7 +117,7 @@ class ALBPeerConnection:NSObject,GCDAsyncSocketDelegate {
 	/**
 	Send a text string to the remote.
 	
-	:param: text The text to send.
+	- parameter text: The text to send.
 	*/
 	func sendText(text:String) {
 		let packet = ALBPeerPacket(type:.text)
@@ -130,7 +130,7 @@ class ALBPeerConnection:NSObject,GCDAsyncSocketDelegate {
 	/**
 	Send data to the remote.
 	
-	:param: data The data to send.
+	- parameter data: The data to send.
 	*/
 	func sendData(data:NSData) {
 		let packet = ALBPeerPacket(type:.data)
@@ -142,15 +142,15 @@ class ALBPeerConnection:NSObject,GCDAsyncSocketDelegate {
 	/**
 	Send a file to the remote.
 	
-	:param: url The URL path to the file.
-	:param: name The name of the file.
-	:param: resourceID A unique string identifier to this resource.
-	:param: onCompletion A block of code that will be called when the resource has been sent
+	- parameter url: The URL path to the file.
+	- parameter name: The name of the file.
+	- parameter resourceID: A unique string identifier to this resource.
+	- parameter onCompletion: A block of code that will be called when the resource has been sent
 	
-	:returns: NSProgress This will be updated as the file is sent. Currently, a send cannot be canceled.
+	- returns: NSProgress This will be updated as the file is sent. Currently, a send cannot be canceled.
 	*/
 	func sendResourceAtURL(url:NSURL, name:String, resourceID:String, onCompletion:completionHandler) -> NSProgress {
-		let data = NSData(contentsOfURL: url, options: NSDataReadingOptions.MappedRead, error: nil)!
+		let data = try! NSData(contentsOfURL: url, options: NSDataReadingOptions.MappedRead)
 		var resource = ALBPeerResource(identity: resourceID, name: name, url: url, data: data)
 		resource.onCompletion = onCompletion
 		resource.progress = NSProgress(totalUnitCount: Int64(resource.length))
@@ -239,19 +239,19 @@ class ALBPeerConnection:NSObject,GCDAsyncSocketDelegate {
 		
 		switch packet.type {
 		case .text:
-			dispatch_async(delegateQueue, { () -> Void in
+			dispatch_async(delegateQueue, {[unowned self] () -> Void in
 				if let delegate = self.delegate {
 					delegate.textReceived(self, text: NSString(data: packet.data!, encoding: NSUTF8StringEncoding) as! String)
 				} else {
-					println("Connection delegate is not assigned")
+					print("Connection delegate is not assigned")
 				}
 			})
 		case .data:
-			dispatch_async(delegateQueue, { () -> Void in
+			dispatch_async(delegateQueue, {[unowned self] () -> Void in
 				if let delegate = self.delegate {
 					delegate.dataReceived(self, data: packet.data!)
 				} else {
-					println("Connection delegate is not assigned")
+					print("Connection delegate is not assigned")
 				}
 			})
 		case .resource:
@@ -266,7 +266,7 @@ class ALBPeerConnection:NSObject,GCDAsyncSocketDelegate {
 				} else {
 					// create file
 					let searchPaths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
-					let documentFolderPath = searchPaths[0] as! String
+					let documentFolderPath = searchPaths[0] 
 					resourcePath = "\(documentFolderPath)/\(name)"
 					var nameIndex = 1
 					while NSFileManager.defaultManager().fileExistsAtPath(resourcePath) {
@@ -298,11 +298,11 @@ class ALBPeerConnection:NSObject,GCDAsyncSocketDelegate {
 						return
 					}
 					
-					dispatch_async(delegateQueue, { () -> Void in
+					dispatch_async(delegateQueue, {[unowned self] () -> Void in
 						if let delegate = self.delegate {
-							delegate.startedReceivingResource(self, atURL: NSURL(fileURLWithPath: resourcePath)!, name: packet.resource!.name, resourceID: resourceID, progress:resource!.progress)
+							delegate.startedReceivingResource(self, atURL: NSURL(fileURLWithPath: resourcePath), name: packet.resource!.name, resourceID: resourceID, progress:resource!.progress)
 						} else {
-							println("Connection delegate is not assigned")
+							print("Connection delegate is not assigned")
 						}
 					})
 				}
@@ -317,11 +317,11 @@ class ALBPeerConnection:NSObject,GCDAsyncSocketDelegate {
 					handle.closeFile()
 					let resource = _resourceFiles[resourceID]!
 					_resourceFiles.removeValueForKey(resourceID)
-					dispatch_async(delegateQueue, { () -> Void in
+					dispatch_async(delegateQueue, {[unowned self] () -> Void in
 						if let delegate = self.delegate {
-							delegate.resourceReceived(self, atURL: NSURL(fileURLWithPath: resourcePath)!, name: resource.name, resourceID: resourceID)
+							delegate.resourceReceived(self, atURL: NSURL(fileURLWithPath: resourcePath), name: resource.name, resourceID: resourceID)
 						} else {
-							println("Connection delegate is not assigned")
+							print("Connection delegate is not assigned")
 						}
 					})
 				}
@@ -351,11 +351,11 @@ class ALBPeerConnection:NSObject,GCDAsyncSocketDelegate {
 	This is for internal use only
 	**/
 	func socketDidDisconnect(sock: GCDAsyncSocket!, withError err: NSError!) {
-		dispatch_async(delegateQueue, { () -> Void in
+		dispatch_async(delegateQueue, {[unowned self] () -> Void in
 			if let delegate = self.delegate {
 				delegate.disconnected(self, byRequest: self._disconnecting)
 			} else {
-				println("Connection delegate is not assigned")
+				print("Connection delegate is not assigned")
 			}
 		})
 	}
