@@ -8,8 +8,8 @@
 
 import Foundation
 
-typealias ALBConnectionRequestResponse = (_ allow: Bool) -> ()
-protocol ALBPeerServerDelegate {
+public typealias ALBConnectionRequestResponse = (_ allow: Bool) -> ()
+public protocol ALBPeerServerDelegate {
 	/**
 	 Called when the server could not publish.
 
@@ -33,8 +33,8 @@ protocol ALBPeerServerDelegate {
 	func clientDidConnect(_ connection: ALBPeerConnection)
 }
 
-class ALBPeerServer: NSObject, NetServiceDelegate, GCDAsyncSocketDelegate {
-	var delegate: ALBPeerServerDelegate?
+public final class ALBPeerServer: NSObject, NetServiceDelegate, GCDAsyncSocketDelegate {
+	public var delegate: ALBPeerServerDelegate?
 	
 	fileprivate var _serviceType: String
 	fileprivate var _localNode: ALBPeer
@@ -52,7 +52,7 @@ class ALBPeerServer: NSObject, NetServiceDelegate, GCDAsyncSocketDelegate {
 	 - parameter serverNode: An ALBPeer object initialized with a name and unique identifier.
 	 - parameter serverDelegate: A reference to an ALBPeerServerDelegate object. This parameter is optional.
 	 **/
-	init(serviceType: String, serverNode: ALBPeer, serverDelegate: ALBPeerServerDelegate?) {
+	public init(serviceType: String, serverNode: ALBPeer, serverDelegate: ALBPeerServerDelegate?) {
 		_serviceType = serviceType
 		_localNode = serverNode
 		delegate = serverDelegate
@@ -65,7 +65,7 @@ class ALBPeerServer: NSObject, NetServiceDelegate, GCDAsyncSocketDelegate {
 
 	 - returns: Bool Whether publishing was successful or not.
 	 */
-	func startPublishing() -> Bool {
+	public func startPublishing() -> Bool {
 		var publishing = false
 		
 		let serverSocket = GCDAsyncSocket(delegate: self, delegateQueue: ALBPeerConnectionQueue, socketQueue: ALBPeerConnectionQueue)
@@ -93,7 +93,7 @@ class ALBPeerServer: NSObject, NetServiceDelegate, GCDAsyncSocketDelegate {
 	/**
 	 Stops publishing the service and disallows any additional connections.
 	 */
-	func stopPublishing() {
+	public func stopPublishing() {
 		_netService?.stop()
 		_netService = nil
 	}
@@ -102,20 +102,20 @@ class ALBPeerServer: NSObject, NetServiceDelegate, GCDAsyncSocketDelegate {
 	/**
 	 Internal use only.
 	 */
-	func netServiceWillPublish(_ service: NetService) {
+	public func netServiceWillPublish(_ service: NetService) {
 	}
 	
 	/**
 	 Internal use only.
 	 */
-	func netService(_ sender: NetService, didNotPublish errorDict: [String : NSNumber]) {
+	public func netService(_ sender: NetService, didNotPublish errorDict: [String : NSNumber]) {
 		delegate?.serverPublishingError(errorDict as [NSObject : AnyObject])
 	}
 	
 	/**
 	 Internal use only.
 	 */
-	func netServiceDidPublish(_ service: NetService) {
+	public func netServiceDidPublish(_ service: NetService) {
 		let txtDict = ["peerID": _localNode.peerID.data(using: String.Encoding.utf8)!]
 		let txtData = NetService.data(fromTXTRecord: txtDict)
 		if !service.setTXTRecord(txtData) {
@@ -127,13 +127,13 @@ class ALBPeerServer: NSObject, NetServiceDelegate, GCDAsyncSocketDelegate {
 	/**
 	 Internal use only.
 	 */
-	func socketDidDisconnect(_ sock: GCDAsyncSocket, withError err: Error?) {
+	public func socketDidDisconnect(_ sock: GCDAsyncSocket, withError err: Error?) {
 	}
 	
 	/**
 	 Internal use only.
 	 */
-	func socket(_ sock: GCDAsyncSocket, didAcceptNewSocket newSocket: GCDAsyncSocket) {
+	public func socket(_ sock: GCDAsyncSocket, didAcceptNewSocket newSocket: GCDAsyncSocket) {
 		_connectingSockets.append(newSocket)
 		newSocket.readData(to: ALBPeerPacketDelimiter as Data!, withTimeout: _initialHandshakeTimeout, tag: 0)
 	}
@@ -141,7 +141,7 @@ class ALBPeerServer: NSObject, NetServiceDelegate, GCDAsyncSocketDelegate {
 	/**
 	 Internal use only.
 	 */
-	func socket(_ sock: GCDAsyncSocket, didRead data: Data, withTag tag: Int) {
+	public func socket(_ sock: GCDAsyncSocket, didRead data: Data, withTag tag: Int) {
 		// client should send clientIdentity information packet
 		if let packet = ALBPeerPacket(packetData: data), let clientNode = ALBPeer(dataValue: packet.data!), packet.type == .connectionRequest {
 			_connectingSockets = _connectingSockets.filter({$0 != sock})

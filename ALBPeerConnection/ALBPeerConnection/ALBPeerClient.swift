@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol ALBPeerClientDelegate {
+public protocol ALBPeerClientDelegate {
 	/**
 	 Called when the client could not start the browser.
 
@@ -52,9 +52,9 @@ protocol ALBPeerClientDelegate {
 	func connected(_ connection: ALBPeerConnection)
 }
 
-class ALBPeerClient: NSObject {
-	var nearbyServers = [ALBPeer]()
-	var delegate: ALBPeerClientDelegate?
+public final class ALBPeerClient: NSObject {
+	public var nearbyServers = [ALBPeer]()
+	public var delegate: ALBPeerClientDelegate?
 
 	fileprivate var _serviceType: String
 	fileprivate var _localNode: ALBPeer
@@ -71,7 +71,7 @@ class ALBPeerClient: NSObject {
 	 - parameter serverNode: An ALBPeer object initialized with a name and unique identifier.
 	 - parameter clientDelegate: A reference to an ALBPeerClientDelegate object. This parameter is optional.
 	 **/
-	init(serviceType: String, clientNode: ALBPeer, clientDelegate: ALBPeerClientDelegate?) {
+	public init(serviceType: String, clientNode: ALBPeer, clientDelegate: ALBPeerClientDelegate?) {
 		_serviceType = serviceType
 		_localNode = clientNode
 		delegate = clientDelegate
@@ -81,7 +81,7 @@ class ALBPeerClient: NSObject {
 	/**
 	 Start browsing for instances of a matching service.
 	 **/
-	func startBrowsing() {
+	public func startBrowsing() {
 		_serviceBrowser = NetServiceBrowser()
 		_serviceBrowser?.delegate = self
 		_serviceBrowser?.includesPeerToPeer = true
@@ -91,7 +91,7 @@ class ALBPeerClient: NSObject {
 	/**
 	 Stop browsing
 	 **/
-	func stopBrowsing() {
+	public func stopBrowsing() {
 		_serviceBrowser?.stop()
 		_serviceBrowser = nil
 	}
@@ -101,7 +101,7 @@ class ALBPeerClient: NSObject {
 
 	 - parameter server: An ALBPeer object returned by the serverFound delegate call.
 	 */
-	func connectToServer(_ server: ALBPeer) {
+	public func connectToServer(_ server: ALBPeer) {
 		if _socket != nil {
 			_socket?.disconnect()
 			_socket = nil
@@ -135,21 +135,21 @@ extension ALBPeerClient: NetServiceBrowserDelegate {
 	/**
 	 Internal use only.
 	 */
-	func netServiceBrowserWillSearch(_ aNetServiceBrowser: NetServiceBrowser) {
+	public func netServiceBrowserWillSearch(_ aNetServiceBrowser: NetServiceBrowser) {
 		// not used
 	}
 
 	/**
 	 Internal use only.
 	 */
-	func netServiceBrowser(_ aNetServiceBrowser: NetServiceBrowser, didNotSearch errorDict: [String: NSNumber]) {
+	public func netServiceBrowser(_ aNetServiceBrowser: NetServiceBrowser, didNotSearch errorDict: [String: NSNumber]) {
 		delegate?.clientBrowsingError(errorDict as [NSObject: AnyObject])
 	}
 
 	/**
 	 Internal use only.
 	 */
-	func netServiceBrowser(_ aNetServiceBrowser: NetServiceBrowser, didFind aNetService: NetService, moreComing: Bool) {
+	public func netServiceBrowser(_ aNetServiceBrowser: NetServiceBrowser, didFind aNetService: NetService, moreComing: Bool) {
 		if aNetService.name != _localNode.name {
 			aNetService.delegate = self
 
@@ -162,7 +162,7 @@ extension ALBPeerClient: NetServiceBrowserDelegate {
 	/**
 	 Internal use only.
 	 */
-	func netServiceBrowser(_ aNetServiceBrowser: NetServiceBrowser, didRemove aNetService: NetService, moreComing: Bool) {
+	public func netServiceBrowser(_ aNetServiceBrowser: NetServiceBrowser, didRemove aNetService: NetService, moreComing: Bool) {
 		let matchingNodes = nearbyServers.filter({ $0.service == aNetService })
 		if matchingNodes.count > 0 {
 			nearbyServers = nearbyServers.filter({ $0.service != aNetService })
@@ -176,7 +176,7 @@ extension ALBPeerClient: NetServiceDelegate {
 	/**
 	 Internal use only.
 	 */
-	func netService(_ sender: NetService, didNotResolve errorDict: [String: NSNumber]) {
+	public func netService(_ sender: NetService, didNotResolve errorDict: [String: NSNumber]) {
 		// not used
 		print(errorDict)
 	}
@@ -184,7 +184,7 @@ extension ALBPeerClient: NetServiceDelegate {
 	/**
 	 Internal use only.
 	 */
-	func netServiceDidResolveAddress(_ service: NetService) {
+	public func netServiceDidResolveAddress(_ service: NetService) {
 		// watch for TXTRecord Updates
 		service.startMonitoring()
 	}
@@ -192,7 +192,7 @@ extension ALBPeerClient: NetServiceDelegate {
 	/**
 	 Internal use only.
 	 */
-	func netService(_ service: NetService, didUpdateTXTRecord data: Data) {
+	public func netService(_ service: NetService, didUpdateTXTRecord data: Data) {
 		let txtDict = NetService.dictionary(fromTXTRecord: data)
 		if let idObject = txtDict["peerID"], let peerID = NSString(data: idObject, encoding: String.Encoding.utf8.rawValue) as? String, nearbyServers.filter({ $0.peerID == peerID }).count == 0 {
 			let remoteNode = ALBPeer(name: service.name, peerID: peerID)
@@ -205,7 +205,7 @@ extension ALBPeerClient: NetServiceDelegate {
 	/**
 	 Internal use only.
 	 */
-	func netServiceDidStop(_ sender: NetService) {
+	public func netServiceDidStop(_ sender: NetService) {
 		_foundPublishers = _foundPublishers.filter({ $0.name != sender.name })
 	}
 }
@@ -215,7 +215,7 @@ extension ALBPeerClient: GCDAsyncSocketDelegate {
 	/**
 	 Internal use only.
 	 */
-	func socket(_ sock: GCDAsyncSocket, didConnectToHost host: String, port: UInt16) {
+	public func socket(_ sock: GCDAsyncSocket, didConnectToHost host: String, port: UInt16) {
 		let data = ALBPeerPacket(type: ALBPeerPacketType.connectionRequest)
 		_socket!.readData(to: ALBPeerPacketDelimiter as Data!, withTimeout: -1, tag: 0)
 		sock.write(data.packetDataUsingData(_localNode.dataValue()), withTimeout: 0.5, tag: 0)
@@ -224,7 +224,7 @@ extension ALBPeerClient: GCDAsyncSocketDelegate {
 	/**
 	 Internal use only.
 	 */
-	func socketDidDisconnect(_ sock: GCDAsyncSocket, withError err: Error?) {
+	public func socketDidDisconnect(_ sock: GCDAsyncSocket, withError err: Error?) {
 		if let server = _server {
 			delegate?.unableToConnect(server)
 			if let service = server.service, let browser = _serviceBrowser {
@@ -241,7 +241,7 @@ extension ALBPeerClient: GCDAsyncSocketDelegate {
 	/**
 	 Internal use only.
 	 */
-	func socket(_ sock: GCDAsyncSocket, didRead data: Data, withTag tag: Int) {
+	public func socket(_ sock: GCDAsyncSocket, didRead data: Data, withTag tag: Int) {
 		if let packet = ALBPeerPacket(packetData: data), let remoteNode = ALBPeer(dataValue: packet.data!), packet.type == .connectionAccepted || packet.type == .connectionDenied {
 			if packet.type == .connectionAccepted {
 				let connection = ALBPeerConnection(socket: sock, remoteNode: remoteNode)

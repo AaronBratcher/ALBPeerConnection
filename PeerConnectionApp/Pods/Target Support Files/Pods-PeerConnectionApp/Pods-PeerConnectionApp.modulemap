@@ -1,0 +1,6 @@
+framework module Pods_PeerConnectionApp {
+  umbrella header "Pods-PeerConnectionApp-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -18,7 +18,7 @@ enum ALBPeerPacketType: String {
 	case resourceError
 }
 
-typealias completionHandler = (_ sent: Bool) -> ()
+public typealias completionHandler = (_ sent: Bool) -> ()
 
 struct ALBPeerResource {
 	var identity: String = ""

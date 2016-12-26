@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol ALBPeerConnectionDelegate {
+public protocol ALBPeerConnectionDelegate {
 	/**
 	 Called when the connection to the remote has been broken.
 
@@ -64,16 +64,16 @@ let ALBPeerPacketDelimiter = Data(bytes: UnsafePointer<UInt8>([0x0B, 0x1B, 0x1B]
 let ALBPeerMaxDataSize = 65536
 let ALBPeerWriteTimeout = TimeInterval(60)
 
-class ALBPeerConnection: NSObject, GCDAsyncSocketDelegate {
-	var delegate: ALBPeerConnectionDelegate? {
+public final class ALBPeerConnection: NSObject, GCDAsyncSocketDelegate {
+	public var delegate: ALBPeerConnectionDelegate? {
 		didSet {
 			_socket.readData(to: ALBPeerPacketDelimiter, withTimeout: -1, tag: 0)
 		}
 	}
 	
-	var delegateQueue = DispatchQueue.main
+	public var delegateQueue = DispatchQueue.main
+	public var remotNode: ALBPeer
 	
-	var remotNode: ALBPeer
 	fileprivate var _socket: GCDAsyncSocket
 	fileprivate var _disconnecting = false
 	fileprivate var _pendingPackets = [Int: ALBPeerPacket]()
@@ -97,7 +97,7 @@ class ALBPeerConnection: NSObject, GCDAsyncSocketDelegate {
 	
 	// MARK: - Initializers
 	/* this is called by the client or server class. Do not call this directly. */
-	init(socket: GCDAsyncSocket, remoteNode: ALBPeer) {
+	public init(socket: GCDAsyncSocket, remoteNode: ALBPeer) {
 		_socket = socket
 		self.remotNode = remoteNode
 		super.init()
@@ -106,7 +106,7 @@ class ALBPeerConnection: NSObject, GCDAsyncSocketDelegate {
 	
 	// MARK: - Public Methods
 	/* Disconnect from the remote. If there are pending packets to be sent, they will be sent before disconnecting. */
-	func disconnect() {
+	public func disconnect() {
 		_disconnecting = true
 		if _pendingPackets.count == 0 {
 			_socket.disconnect()
@@ -118,7 +118,7 @@ class ALBPeerConnection: NSObject, GCDAsyncSocketDelegate {
 
 	 - parameter text: The text to send.
 	 */
-	func sendText(_ text: String) {
+	public func sendText(_ text: String) {
 		let packet = ALBPeerPacket(type: .text)
 		let data = text.data(using: String.Encoding.utf8, allowLossyConversion: false)
 		_pendingPackets[_lastTag] = packet
@@ -131,7 +131,7 @@ class ALBPeerConnection: NSObject, GCDAsyncSocketDelegate {
 
 	 - parameter data: The data to send.
 	 */
-	func sendData(_ data: Data) {
+	public func sendData(_ data: Data) {
 		let packet = ALBPeerPacket(type: .data)
 		_pendingPackets[_lastTag] = packet
 		_socket.write(packet.packetDataUsingData(data), withTimeout: ALBPeerWriteTimeout, tag: _lastTag)
@@ -148,7 +148,7 @@ class ALBPeerConnection: NSObject, GCDAsyncSocketDelegate {
 
 	 - returns: NSProgress This will be updated as the file is sent. Currently, a send cannot be canceled.
 	 */
-	func sendResourceAtURL(_ url: URL, name: String, resourceID: String, onCompletion: @escaping completionHandler) -> Progress {
+	public func sendResourceAtURL(_ url: URL, name: String, resourceID: String, onCompletion: @escaping completionHandler) -> Progress {
 		let data = try! Data(contentsOf: url, options: NSData.ReadingOptions.mappedRead)
 		var resource = ALBPeerResource(identity: resourceID, name: name, url: url, data: data)
 		resource.onCompletion = onCompletion
@@ -186,7 +186,7 @@ class ALBPeerConnection: NSObject, GCDAsyncSocketDelegate {
 	/**
 	 This is for internal use only
 	 **/
-	func socket(_ sock: GCDAsyncSocket, didWriteDataWithTag tag: Int) {
+	public func socket(_ sock: GCDAsyncSocket, didWriteDataWithTag tag: Int) {
 		if let packet = _pendingPackets[tag] {
 			_pendingPackets.removeValue(forKey: tag)
 			
@@ -211,7 +211,7 @@ class ALBPeerConnection: NSObject, GCDAsyncSocketDelegate {
 	/**
 	 This is for internal use only
 	 **/
-	func socket(_ sock: GCDAsyncSocket, didRead data: Data, withTag tag: Int) {
+	public func socket(_ sock: GCDAsyncSocket, didRead data: Data, withTag tag: Int) {
 		if let packet = ALBPeerPacket(packetData: data) {
 			processPacket(packet)
 		} else {
@@ -350,7 +350,7 @@ class ALBPeerConnection: NSObject, GCDAsyncSocketDelegate {
 	/**
 	 This is for internal use only
 	 **/
-	func socketDidDisconnect(_ sock: GCDAsyncSocket, withError err: Error?) {
+	public func socketDidDisconnect(_ sock: GCDAsyncSocket, withError err: Error?) {
 		delegateQueue.async(execute: {[unowned self]() -> Void in
 				if let delegate = self.delegate {
 					delegate.disconnected(self, byRequest: self._disconnecting)

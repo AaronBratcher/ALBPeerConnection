@@ -8,18 +8,18 @@
 
 import Foundation
 
-class ALBPeer {
-	var name: String
-	var peerID: String
-	var service: NetService?
+public final class ALBPeer {
+	public var name: String
+	public var peerID: String
+	public var service: NetService?
 
-	func dataValue() -> Data {
+	public func dataValue() -> Data {
 		let dict: [String: AnyObject] = ["name": name as AnyObject, "peerID": peerID as AnyObject]
 		let dictData = NSKeyedArchiver.archivedData(withRootObject: dict)
 		return dictData
 	}
 
-	init?(dataValue: Data) {
+	public init?(dataValue: Data) {
 		if let dataDict = NSKeyedUnarchiver.unarchiveObject(with: dataValue) as? [String: AnyObject] {
 			name = dataDict["name"] as! String
 			peerID = dataDict["peerID"] as! String
@@ -28,7 +28,7 @@ class ALBPeer {
 		}
 	}
 
-	init(name: String, peerID: String) {
+	public init(name: String, peerID: String) {
 		self.name = name
 		self.peerID = peerID
 	}

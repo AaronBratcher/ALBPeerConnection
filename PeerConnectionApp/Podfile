@@ -5,5 +5,6 @@ target 'PeerConnectionApp' do
   use_frameworks!
 
   # Pods for DBApp
-pod 'ALBPeerConnection', :path => '../ALBPeerConnection'
+  pod 'ALBPeerConnection', :path => '../ALBPeerConnection'
+  pod 'ALBNoSQLDB', '~> 4.0'
 end

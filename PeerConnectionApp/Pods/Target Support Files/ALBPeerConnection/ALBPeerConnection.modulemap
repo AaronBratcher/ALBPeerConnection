@@ -1,0 +1,6 @@
+framework module ALBPeerConnection {
+  umbrella header "ALBPeerConnection-umbrella.h"
+
+  export *
+  module * { export * }
+}
