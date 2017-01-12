@@ -6,7 +6,6 @@
 //  Copyright © 2016 Aaron Bratcher. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #include "CocoaAsyncSocket/GCDAsyncSocket.h"
 
 //! Project version number for ALBPeerConnection.
