@@ -1,15 +1,11 @@
 # ALBPeerConnection
+[![CocoaPods](https://img.shields.io/cocoapods/v/ALBPeerConnection.svg)](https://cocoapods.org/)
+
 Peer-Peer networking classes written (mostly) in Swift. (Socket is Objective-C class GCDAsyncSocket)
 
 See the Shopping project for an example of using this class to sync between instances of an app.
 
 **This class uses Swift 3**
-
-** To Do:
-* Add Unit Testing
-* Add secure connections
-* Add sample app
-
 
 Peer to Peer classes for communicating between nearby devices over wifi or bluetooth.
 
