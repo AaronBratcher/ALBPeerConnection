@@ -64,7 +64,7 @@ func clientDidConnect(connection:ALBPeerConnection) {
 
 initialize an instance of the client.
 ```swift
-let netNode = ALBPeer(name: "Server device", peerID: "uniquedeviceid")
+let netNode = ALBPeer(name: "Client device", peerID: "uniquedeviceid")
 let netClient = ALBPeerClient(serviceType:"_albsync._tcp.", clientNode:netNode, clientDelegate:nil)
 netClient.delegate = self
 ```
