@@ -115,7 +115,7 @@ func connected(connection:ALBPeerConnection) {
 }
 ```
 
-###Connection###
+### Connection ###
 
 Close the connection.
 ```swift
