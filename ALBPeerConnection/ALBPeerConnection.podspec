@@ -16,5 +16,5 @@ Pod::Spec.new do |s|
   s.ios.source_files  	= "ALBPeerConnection", "ALBPeerConnection/ALBPeerConnection/**/*.{h,m,swift}"
   s.osx.source_files  	= "ALBPeerConnection", "ALBPeerConnection/ALBPeerConnection/**/*.{h,m,swift}"
   
-  s.dependency 'CocoaAsyncSocket', '~> 7.5'
+  s.dependency 'CocoaAsyncSocket'
 end
