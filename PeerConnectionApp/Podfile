@@ -6,5 +6,5 @@ target 'PeerConnectionApp' do
 
   # Pods for DBApp
   pod 'ALBPeerConnection', :path => '../ALBPeerConnection'
-  pod 'ALBNoSQLDB', :path => '../../ALBNoSQLDB/ALBNoSQLDB'
+  pod 'ALBNoSQLDB'
 end
