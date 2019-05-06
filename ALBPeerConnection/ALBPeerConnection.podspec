@@ -13,6 +13,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = "10.0"
 
   s.source       		= { :git => "https://github.com/AaronBratcher/ALBPeerConnection.git", :tag => s.version }
+  s.swift_version		= '5.0'
   s.ios.source_files  	= "ALBPeerConnection", "ALBPeerConnection/ALBPeerConnection/**/*.{h,m,swift}"
   s.osx.source_files  	= "ALBPeerConnection", "ALBPeerConnection/ALBPeerConnection/**/*.{h,m,swift}"
   
