@@ -1,4 +1,6 @@
 # ALBPeerConnection
+[![CocoaPods](https://img.shields.io/cocoapods/v/ALBPeerConnection.svg)](https://cocoapods.org/)
+
 Peer-Peer networking classes written (mostly) in Swift. (Socket is Objective-C class GCDAsyncSocket)
 
 See the Shopping project for an example of using this class to sync between instances of an app.
@@ -67,7 +69,7 @@ func clientDidConnect(connection:ALBPeerConnection) {
 
 initialize an instance of the client.
 ```swift
-let netNode = ALBPeer(name: "Server device", peerID: "uniquedeviceid")
+let netNode = ALBPeer(name: "Client device", peerID: "uniquedeviceid")
 let netClient = ALBPeerClient(serviceType:"_albsync._tcp.", clientNode:netNode, clientDelegate:nil)
 netClient.delegate = self
 ```
@@ -118,7 +120,7 @@ func connected(connection:ALBPeerConnection) {
 }
 ```
 
-###Connection###
+### Connection ###
 
 Close the connection.
 ```swift
