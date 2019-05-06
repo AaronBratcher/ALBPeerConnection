@@ -37,7 +37,10 @@ enum DataType: Int {
 	case unlink = 3
 }
 
-class SyncDevice: ALBNoSQLDBObject {
+final class SyncDevice: DBObject {
+	static var table: DBTable = DBTable(name: kDevicesTable)
+	
+	var key = UUID().uuidString
 	var name = ""
 	var linked = false
 	var lastSync: Date?
@@ -45,52 +48,27 @@ class SyncDevice: ALBNoSQLDBObject {
 	var status = SyncDeviceStatus.idle
 	var errorState = false
 	var netNode: ALBPeer?
-
-	convenience init?(key: String) {
-		if let value = ALBNoSQLDB.dictValueForKey(table: kDevicesTable, key: key) {
-			self.init(keyValue: key, dictValue: value)
-		} else {
-			return nil
-		}
+	
+	private enum DeviceJsonKey: String, CodingKey {
+		case name, linked, lastSync, lastSequence
 	}
-
-	override init(keyValue: String, dictValue: [String: AnyObject]? = nil) {
-		if let dictValue = dictValue {
-			if let name = dictValue["name"] as? String {
-				self.name = name
-			}
-			
-			if let linked = dictValue["linked"] as? Bool {
-				self.linked = linked
-			}
-			
-			if let lastSequence = dictValue["lastSequence"] as? Int {
-				self.lastSequence = lastSequence
-			}
-			
-			if let lastSync = dictValue["lastSync"] as? String {
-				self.lastSync = ALBNoSQLDB.dateValueForString(lastSync)
-			}
-		}
-
-		super.init(keyValue: keyValue, dictValue: dictValue)
+	
+	required init() { }
+	
+	required init(from decoder: Decoder) throws {
+		let container = try decoder.container(keyedBy: DeviceJsonKey.self)
+		name = try container.decode(String.self, forKey: .name)
+		linked = try container.decode(Bool.self, forKey: .linked)
+		lastSequence = try container.decode(Int.self, forKey: .lastSequence)
+		lastSync = try container.decodeIfPresent(Date.self, forKey: .lastSync)
 	}
-
-	func save() {
-		let _ = ALBNoSQLDB.setValue(table: kDevicesTable, key: key, value: jsonValue(), autoDeleteAfter: nil)
-	}
-
-	override func dictionaryValue() -> [String: AnyObject] {
-		var dictValue = [String: AnyObject]()
-
-		dictValue["name"] = name as AnyObject
-		dictValue["linked"] = linked as AnyObject
-		dictValue["lastSequence"] = lastSequence as AnyObject
-		if let lastSync = self.lastSync {
-			dictValue["lastSync"] = ALBNoSQLDB.stringValueForDate(lastSync) as AnyObject
-		}
-
-		return dictValue
+	
+	func encode(to encoder: Encoder) throws {
+		var container = encoder.container(keyedBy: DeviceJsonKey.self)
+		try container.encode(name, forKey: .name)
+		try container.encode(linked, forKey: .linked)
+		try container.encode(lastSequence, forKey: .lastSequence)
+		try container.encodeIfPresent(lastSync, forKey: .lastSync)
 	}
 }
 
@@ -116,9 +94,9 @@ class SyncEngine: ALBPeerServerDelegate, ALBPeerClientDelegate, ALBPeerConnectio
 	private var _identityKey = ""
 
 	init?(name: String) {
-		if let deviceKeys = ALBNoSQLDB.keysInTable(kDevicesTable, sortOrder: "name") {
+		if let deviceKeys = ALBNoSQLDB.shared.keysInTable(SyncDevice.table, sortOrder: "name") {
 			for deviceKey in deviceKeys {
-				if let offlineDevice = SyncDevice(key: deviceKey) {
+				if let offlineDevice = SyncDevice(db: ALBNoSQLDB.shared, key: deviceKey) {
 					offlineDevices.append(offlineDevice)
 				}
 			}
@@ -126,8 +104,8 @@ class SyncEngine: ALBPeerServerDelegate, ALBPeerClientDelegate, ALBPeerConnectio
 
 		_timer = DispatchSource.makeTimerSource(flags: DispatchSource.TimerFlags(rawValue: UInt(0)), queue: syncQueue) /*Migrator FIXME: Use DispatchSourceTimer to avoid the cast*/ as! DispatchSource
 
-		let _ = ALBNoSQLDB.enableSyncing()
-		if let dbKey = ALBNoSQLDB.dbInstanceKey() {
+		let _ = ALBNoSQLDB.shared.enableSyncing()
+		if let dbKey = ALBNoSQLDB.shared.instanceKey {
 			_identityKey = dbKey
 		}
 
@@ -185,7 +163,7 @@ class SyncEngine: ALBPeerServerDelegate, ALBPeerClientDelegate, ALBPeerConnectio
 	}
 
 	func completeDeviceUnlink(_ device: SyncDevice) {
-		let _ = ALBNoSQLDB.deleteForKey(table: kDevicesTable, key: device.key)
+		ALBNoSQLDB.shared.deleteFromTable(SyncDevice.table, for: device.key)
 		device.linked = false
 		if offlineDevices.filter({ $0.key == device.key }).count > 0 {
 			offlineDevices = offlineDevices.filter({ $0.key != device.key })
@@ -201,7 +179,7 @@ class SyncEngine: ALBPeerServerDelegate, ALBPeerClientDelegate, ALBPeerConnectio
 		}
 
 		let syncDevice: SyncDevice
-		if let device = SyncDevice(key: node.peerID) {
+		if let device = SyncDevice(db: ALBNoSQLDB.shared, key: node.peerID) {
 			syncDevice = device
 		} else {
 			let device = SyncDevice()
@@ -274,7 +252,7 @@ class SyncEngine: ALBPeerServerDelegate, ALBPeerClientDelegate, ALBPeerConnectio
 		let device = deviceForNode(connection.remotNode)
 		if !device.linked {
 			device.linked = true
-			device.save()
+			device.save(to: ALBNoSQLDB.shared)
 		}
 
 		device.status = .idle
@@ -310,7 +288,7 @@ class SyncEngine: ALBPeerServerDelegate, ALBPeerClientDelegate, ALBPeerConnectio
 			}
 
 			self.nearbyDevices = self.nearbyDevices.filter({ $0.key != device.key })
-			if let offlineDevice = SyncDevice(key: device.key) {
+			if let offlineDevice = SyncDevice(db: ALBNoSQLDB.shared, key: device.key) {
 				self.offlineDevices.append(offlineDevice)
 			}
 
@@ -356,7 +334,7 @@ class SyncEngine: ALBPeerServerDelegate, ALBPeerClientDelegate, ALBPeerConnectio
 		// connection was initiatied to link, unlink or sync. An allowed connection says we should now be linked.
 		if !device.linked {
 			device.linked = true
-			device.save()
+			device.save(to: ALBNoSQLDB.shared)
 			device.errorState = false
 		}
 
@@ -366,7 +344,7 @@ class SyncEngine: ALBPeerServerDelegate, ALBPeerClientDelegate, ALBPeerConnectio
 			connection.sendData(data)
 			connection.disconnect()
 
-			let _ = ALBNoSQLDB.deleteForKey(table: kDevicesTable, key: device.key)
+			ALBNoSQLDB.shared.deleteFromTable(SyncDevice.table, for: device.key)
 			device.linked = false
 			device.status = .idle
 			notifyStatusChanged(device)
@@ -414,11 +392,11 @@ class SyncEngine: ALBPeerServerDelegate, ALBPeerClientDelegate, ALBPeerConnectio
 				syncQueue.async(execute: { () -> Void in
 					let searchPaths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
 					let documentFolderPath = searchPaths[0]
-					let fileName = ALBNoSQLDB.guid()
+					let fileName = UUID().uuidString
 					let logFilePath = "\(documentFolderPath)/\(fileName).txt"
 					let url = URL(fileURLWithPath: logFilePath)
 
-					let (success, _): (Bool, Int) = ALBNoSQLDB.createSyncFileAtURL(url, lastSequence: lastSequence, targetDBInstanceKey: connection.remotNode.peerID)
+					let (success, _): (Bool, Int) = ALBNoSQLDB.shared.createSyncFileAtURL(url, lastSequence: lastSequence, targetDBInstanceKey: connection.remotNode.peerID)
 
 					if success, let zipURL = URL(string: "") {
 						let progress = connection.sendResourceAtURL(zipURL, name: "\(fileName).zip", resourceID: fileName, onCompletion: { (sent) -> () in
@@ -463,19 +441,19 @@ class SyncEngine: ALBPeerServerDelegate, ALBPeerClientDelegate, ALBPeerConnectio
 		connection.disconnect()
 
 		syncQueue.async(execute: { () -> Void in
-			if let summaryKeys = ALBNoSQLDB.keysInTable(kMonthlySummaryEntriesTable, sortOrder: nil) {
+			if let summaryKeys = ALBNoSQLDB.shared.keysInTable(kMonthlySummaryEntriesTable, sortOrder: nil) {
 				for key in summaryKeys {
-					let _ = ALBNoSQLDB.deleteForKey(table: kMonthlySummaryEntriesTable, key: key)
+					ALBNoSQLDB.shared.deleteFromTable(DBTable(name: kMonthlySummaryEntriesTable), for: key)
 				}
 			}
 
 			let logURL = URL(fileReferenceLiteralResourceName: "")
 
-			let (successful, _, lastSequence): (Bool, String, Int) = ALBNoSQLDB.processSyncFileAtURL(logURL, syncProgress: nil)
+			let (successful, _, lastSequence): (Bool, String, Int) = ALBNoSQLDB.shared.processSyncFileAtURL(logURL, syncProgress: nil)
 			if successful {
 				device.lastSequence = lastSequence
 				device.lastSync = Date()
-				device.save()
+				device.save(to: ALBNoSQLDB.shared)
 				device.errorState = false
 			} else {
 				device.errorState = true

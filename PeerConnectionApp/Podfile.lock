@@ -1,24 +1,28 @@
 PODS:
-  - ALBNoSQLDB (4.1.1)
-  - ALBPeerConnection (3.0):
-    - CocoaAsyncSocket (~> 7.5)
-  - CocoaAsyncSocket (7.5.1):
-    - CocoaAsyncSocket/GCD (= 7.5.1)
-  - CocoaAsyncSocket/GCD (7.5.1)
+  - ALBNoSQLDB (5.1)
+  - ALBPeerConnection (3.0.2):
+    - CocoaAsyncSocket
+  - CocoaAsyncSocket (7.6.3)
 
 DEPENDENCIES:
-  - ALBNoSQLDB (~> 4.0)
+  - ALBNoSQLDB (from `../../ALBNoSQLDB/ALBNoSQLDB`)
   - ALBPeerConnection (from `../ALBPeerConnection`)
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - CocoaAsyncSocket
+
 EXTERNAL SOURCES:
+  ALBNoSQLDB:
+    :path: "../../ALBNoSQLDB/ALBNoSQLDB"
   ALBPeerConnection:
-    :path: ../ALBPeerConnection
+    :path: "../ALBPeerConnection"
 
 SPEC CHECKSUMS:
-  ALBNoSQLDB: de7bb40e23ea4f680b1dc4578acd419060ed0984
-  ALBPeerConnection: 046d7bf8839d4ded1ac926c5ff1f11e71e9afcad
-  CocoaAsyncSocket: e0a7e93b2ffa411592ff87e58524fbbc9b95b4fa
+  ALBNoSQLDB: f71e1514b4375c6fa5a1b3f2e73842f256d1e9a1
+  ALBPeerConnection: 19d3889317826532ee5ba3cb4b3e25111e38f7ac
+  CocoaAsyncSocket: eafaa68a7e0ec99ead0a7b35015e0bf25d2c8987
 
-PODFILE CHECKSUM: 5609c35124332424f1341802081470266de5d807
+PODFILE CHECKSUM: 5ae7f594bdbb91a65583967bb625ebe460075ce1
 
-COCOAPODS: 1.2.0.beta.1
+COCOAPODS: 1.5.3

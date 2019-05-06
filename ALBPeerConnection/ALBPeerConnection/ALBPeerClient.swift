@@ -194,12 +194,15 @@ extension ALBPeerClient: NetServiceDelegate {
 	 */
 	public func netService(_ service: NetService, didUpdateTXTRecord data: Data) {
 		let txtDict = NetService.dictionary(fromTXTRecord: data)
-		if let idObject = txtDict["peerID"], let peerID = NSString(data: idObject, encoding: String.Encoding.utf8.rawValue) as? String, nearbyServers.filter({ $0.peerID == peerID }).count == 0 {
-			let remoteNode = ALBPeer(name: service.name, peerID: peerID)
-			remoteNode.service = service
-			nearbyServers.append(remoteNode)
-			delegate?.serverFound(remoteNode)
-		}
+		guard let idObject = txtDict["peerID"]
+			, let peerID = String(data: idObject, encoding: .utf8)
+			, nearbyServers.filter({ $0.peerID == peerID }).count == 0
+			else { return }
+		
+		let remoteNode = ALBPeer(name: service.name, peerID: peerID)
+		remoteNode.service = service
+		nearbyServers.append(remoteNode)
+		delegate?.serverFound(remoteNode)
 	}
 
 	/**
@@ -216,8 +219,10 @@ extension ALBPeerClient: GCDAsyncSocketDelegate {
 	 Internal use only.
 	 */
 	public func socket(_ sock: GCDAsyncSocket, didConnectToHost host: String, port: UInt16) {
+        guard let _socket = _socket else { return }
+        
 		let data = ALBPeerPacket(type: ALBPeerPacketType.connectionRequest)
-		_socket!.readData(to: ALBPeerPacketDelimiter as Data!, withTimeout: -1, tag: 0)
+		_socket.readData(to: ALBPeerPacketDelimiter, withTimeout: -1, tag: 0)
 		sock.write(data.packetDataUsingData(_localNode.dataValue()), withTimeout: 0.5, tag: 0)
 	}
 

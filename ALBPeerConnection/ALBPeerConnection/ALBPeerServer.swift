@@ -135,7 +135,7 @@ public final class ALBPeerServer: NSObject, NetServiceDelegate, GCDAsyncSocketDe
 	 */
 	public func socket(_ sock: GCDAsyncSocket, didAcceptNewSocket newSocket: GCDAsyncSocket) {
 		_connectingSockets.append(newSocket)
-		newSocket.readData(to: ALBPeerPacketDelimiter as Data!, withTimeout: _initialHandshakeTimeout, tag: 0)
+		newSocket.readData(to: ALBPeerPacketDelimiter, withTimeout: _initialHandshakeTimeout, tag: 0)
 	}
 	
 	/**

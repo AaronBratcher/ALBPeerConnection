@@ -175,7 +175,7 @@ public final class ALBPeerConnection: NSObject, GCDAsyncSocketDelegate {
 		
 		packet.resource = resource
 		
-		let range = Range(0..<resource.offset + dataSize)
+		let range = 0..<resource.offset + dataSize
 		let subData = resource.mappedData!.subdata(in: range)
 		_pendingPackets[_lastTag] = packet
 		_socket.write(packet.packetDataUsingData(subData), withTimeout: ALBPeerWriteTimeout, tag: _lastTag)
@@ -241,7 +241,11 @@ public final class ALBPeerConnection: NSObject, GCDAsyncSocketDelegate {
 		case .text:
 			delegateQueue.async(execute: {[unowned self]() -> Void in
 					if let delegate = self.delegate {
-						delegate.textReceived(self, text: NSString(data: packet.data! as Data, encoding: String.Encoding.utf8.rawValue) as! String)
+						guard let data = packet.data
+							, let text = String(data: data, encoding: .utf8)
+							else { return }
+						
+						delegate.textReceived(self, text: text)
 					} else {
 						print("Connection delegate is not assigned")
 					}
@@ -308,7 +312,7 @@ public final class ALBPeerConnection: NSObject, GCDAsyncSocketDelegate {
 				}
 				
 				if let progress = resource?.progress {
-					progress.completedUnitCount = progress.completedUnitCount + packetLength
+					progress.completedUnitCount = progress.completedUnitCount + Int64(packetLength)
 				}
 				
 				handle.write(packet.data! as Data)
