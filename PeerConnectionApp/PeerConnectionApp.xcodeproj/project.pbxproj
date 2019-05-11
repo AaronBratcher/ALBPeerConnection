@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		155DCD0B89A545F0D0EE964E /* Pods_PeerConnectionApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 994C45A3AD2F060115EAB92B /* Pods_PeerConnectionApp.framework */; };
 		8956A7CF1E11539900E3C870 /* SyncEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8956A7CE1E11539900E3C870 /* SyncEngine.swift */; };
 		896EBE521D9BD93300E3C870 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896EBE511D9BD93300E3C870 /* AppDelegate.swift */; };
 		896EBE541D9BD93300E3C870 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896EBE531D9BD93300E3C870 /* ViewController.swift */; };
@@ -25,9 +24,6 @@
 		896EBE581D9BD93300E3C870 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		896EBE5B1D9BD93300E3C870 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		896EBE5D1D9BD93300E3C870 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		994C45A3AD2F060115EAB92B /* Pods_PeerConnectionApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PeerConnectionApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D0CCEC45FD94F32CE2EA5796 /* Pods-PeerConnectionApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeerConnectionApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-PeerConnectionApp/Pods-PeerConnectionApp.release.xcconfig"; sourceTree = "<group>"; };
-		FB470E974BC1ACBE0B69EC61 /* Pods-PeerConnectionApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeerConnectionApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PeerConnectionApp/Pods-PeerConnectionApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,29 +31,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				155DCD0B89A545F0D0EE964E /* Pods_PeerConnectionApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		396915C97D945D3308B809E8 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				FB470E974BC1ACBE0B69EC61 /* Pods-PeerConnectionApp.debug.xcconfig */,
-				D0CCEC45FD94F32CE2EA5796 /* Pods-PeerConnectionApp.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		896EBE451D9BD93200E3C870 = {
 			isa = PBXGroup;
 			children = (
 				896EBE501D9BD93300E3C870 /* PeerConnectionApp */,
 				896EBE4F1D9BD93300E3C870 /* Products */,
-				396915C97D945D3308B809E8 /* Pods */,
-				B4E32B1E99DF90F93CF29759 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -83,14 +67,6 @@
 			path = PeerConnectionApp;
 			sourceTree = "<group>";
 		};
-		B4E32B1E99DF90F93CF29759 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				994C45A3AD2F060115EAB92B /* Pods_PeerConnectionApp.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -98,11 +74,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 896EBE601D9BD93300E3C870 /* Build configuration list for PBXNativeTarget "PeerConnectionApp" */;
 			buildPhases = (
-				B0C511B13FC2A3CE67238B8C /* [CP] Check Pods Manifest.lock */,
 				896EBE4A1D9BD93300E3C870 /* Sources */,
 				896EBE4B1D9BD93300E3C870 /* Frameworks */,
 				896EBE4C1D9BD93300E3C870 /* Resources */,
-				2FFEF9CBC4D0A6C3021FA56C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -120,7 +94,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "Aaron Bratcher";
 				TargetAttributes = {
 					896EBE4D1D9BD93300E3C870 = {
@@ -133,10 +107,9 @@
 			};
 			buildConfigurationList = 896EBE491D9BD93200E3C870 /* Build configuration list for PBXProject "PeerConnectionApp" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
@@ -162,57 +135,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		2FFEF9CBC4D0A6C3021FA56C /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-PeerConnectionApp/Pods-PeerConnectionApp-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/ALBNoSQLDB/ALBNoSQLDB.framework",
-				"${BUILT_PRODUCTS_DIR}/ALBPeerConnection/ALBPeerConnection.framework",
-				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ALBNoSQLDB.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ALBPeerConnection.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PeerConnectionApp/Pods-PeerConnectionApp-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B0C511B13FC2A3CE67238B8C /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-PeerConnectionApp-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		896EBE4A1D9BD93300E3C870 /* Sources */ = {
@@ -251,20 +173,30 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -301,20 +233,30 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -342,7 +284,6 @@
 		};
 		896EBE611D9BD93300E3C870 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FB470E974BC1ACBE0B69EC61 /* Pods-PeerConnectionApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = BJL688BZ75;
@@ -356,7 +297,6 @@
 		};
 		896EBE621D9BD93300E3C870 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D0CCEC45FD94F32CE2EA5796 /* Pods-PeerConnectionApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = BJL688BZ75;
