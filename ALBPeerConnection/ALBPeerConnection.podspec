@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.author             = { "Aaron Bratcher" => "aaronbratcher1@gmail.com" }
   s.social_media_url   = "http://twitter.com/AaronLBratcher"
 
-  s.osx.deployment_target = "10.10"
+  s.osx.deployment_target = "10.12"
   s.ios.deployment_target = "10.0"
 
   s.source       		= { :git => "https://github.com/AaronBratcher/ALBPeerConnection.git", :tag => s.version }
