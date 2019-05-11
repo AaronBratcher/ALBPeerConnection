@@ -14,6 +14,9 @@ See the Shopping project for an example of using this class to sync between inst
 
 Peer to Peer classes for communicating between nearby devices over wifi or bluetooth.
 
+## What's new in version 3.0.2 ##
+* Developed and tested with Xcode 10.2 using Swift 5
+
 
 ## Getting Started ##
 A client and server are initialized with a name and unique identifier for each. The server publishes itself on Bonjour so the client can see it.
