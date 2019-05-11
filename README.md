@@ -150,15 +150,15 @@ func textReceived(connection: ALBPeerConnection, text: String) {
 	// text received
 }
 
-func dataReceived(connection:ALBPeerConnection, data:NSData) {
+func dataReceived(connection:ALBPeerConnection, data:Data) {
 	// data received
 }
 
-func startedReceivingResource(connection:ALBPeerConnection, atURL:NSURL, name:String, resourceID:String, progress:NSProgress) {
+func startedReceivingResource(connection:ALBPeerConnection, atURL:URL, name:String, resourceID:String, progress:Progress) {
 	// resource transfer started
 }
 
-func resourceReceived(connection:ALBPeerConnection, atURL:NSURL, name:String, resourceID:String) {
+func resourceReceived(connection:ALBPeerConnection, atURL:URL, name:String, resourceID:String) {
 	// resource transfer complete
 }
 ```
